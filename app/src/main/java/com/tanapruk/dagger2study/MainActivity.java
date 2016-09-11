@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         ((MainApplication) getApplication()).getUtilComponent().inject(this);
 
-        
+
         //use it without instantiating by
         sharedPreferencesByInjection.edit().putString("Test writing string", "This is my string").apply();
 
