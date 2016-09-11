@@ -57,7 +57,7 @@ public class NetModule {
     OkHttpClient provideHttpClient(Cache cache) {
         return new OkHttpClient.Builder().cache(cache).build();
     }
-    
+
     @Provides
     @Singleton
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
