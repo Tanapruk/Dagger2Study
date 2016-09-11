@@ -29,6 +29,11 @@ public class NetModule {
         this.mBaseUrl = mBaseUrl;
     }
 
+    /**
+     *
+     * @param application is @provides by {@code AppModule#providesApplication}
+     * @return
+     */
     @Provides
     @Singleton
     SharedPreferences providesSharedPreferences(Application application) {
@@ -39,8 +44,7 @@ public class NetModule {
     @Singleton
     Cache provideOkHttpCache(Application application) {
         int cacheSize = 10 * 1024 * 1024;
-        Cache cache = new Cache(application.getCacheDir(), cacheSize);
-        return cache;
+        return new Cache(application.getCacheDir(), cacheSize);
     }
 
     @Provides
@@ -52,12 +56,23 @@ public class NetModule {
         return gsonBuilder.create();
     }
 
+    /**
+     *
+     * @param cache is @Provides by provideOkHttpCache
+     * @return
+     */
     @Provides
     @Singleton
     OkHttpClient provideHttpClient(Cache cache) {
         return new OkHttpClient.Builder().cache(cache).build();
     }
 
+    /**
+     *
+     * @param gson is @Provides by  provideGson
+     * @param okHttpClient is @Provides by  provideHttpClient
+     * @return
+     */
     @Provides
     @Singleton
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
