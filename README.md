@@ -31,7 +31,7 @@ Employee employee = new Employee(address);
 
 ####No Dagger
 
-```Android 
+```Java 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 ####With Dagger
 
-```Android
+```Java
 public class MainActivity extends AppCompatActivity {
     @Inject
     SharedPreferences sharedPreferences;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 * Since PreferenceManager.getDefaultSharedPreferences() required `context`
 * We need to provide a context (application)
 
-```Android
+```Java
 @Module
 public class AppModule {
     Application mApplication;
@@ -92,7 +92,7 @@ public class AppModule {
 ####UtilModule.java with @Module and @Provides
 *  Dagger will magically look through every @Provides inside every @Module and get the dependency they want
 *  so this `application` will get the @Provides from the `AppModule`
-```Android
+```Java
 @Module
 public class UtilModule {
     @Provides
@@ -106,7 +106,7 @@ public class UtilModule {
 ####Link both modules togeter with @Component
 * With this annotation both modules can talk to each other
 
-```Android
+```Java
 @Singleton
 @Component(modules = {AppModule.class, UtilModule.class})
 public interface UtilComponent {
@@ -118,7 +118,7 @@ public interface UtilComponent {
 ####Initialize the Component inside Custom Application class
 * Satisfy dependencies in this module
 
-```Android
+```Java
 public class MainApplication extends Application {
     private UtilComponent mUtilComponent;
 
@@ -142,7 +142,7 @@ public class MainApplication extends Application {
 ```
 
 ####Injection inside MainActivity
-```Android
+```Java
 ((MainApplication) getApplication()).getUtilComponent().inject(this);
 ```
 
