@@ -19,20 +19,10 @@ import dagger.Provides;
  */
 @Module
 public class AppModule {
-
     Application mApplication;
-
     public AppModule(Application mApplication) {
         this.mApplication = mApplication;
     }
-
-
-    /**
-     * There are other methods that need {@link Application} so we annotate with @Provides
-     * so those other methods will automatically consume from this provide method
-     * Annotate @Singleton is self explanatory
-     * @return
-     */
     @Provides
     @Singleton
     Application provideApplication() {
